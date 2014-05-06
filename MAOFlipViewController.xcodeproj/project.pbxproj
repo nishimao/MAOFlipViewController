@@ -10,10 +10,6 @@
 		D1C9BD72191919B000B22750 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C9BD71191919B000B22750 /* Foundation.framework */; };
 		D1C9BD74191919B000B22750 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C9BD73191919B000B22750 /* CoreGraphics.framework */; };
 		D1C9BD76191919B000B22750 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C9BD75191919B000B22750 /* UIKit.framework */; };
-		D1C9BD7C191919B000B22750 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D1C9BD7A191919B000B22750 /* InfoPlist.strings */; };
-		D1C9BD7E191919B000B22750 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C9BD7D191919B000B22750 /* main.m */; };
-		D1C9BD82191919B000B22750 /* MAOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C9BD81191919B000B22750 /* MAOAppDelegate.m */; };
-		D1C9BD84191919B000B22750 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1C9BD83191919B000B22750 /* Images.xcassets */; };
 		D1C9BD8B191919B000B22750 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C9BD8A191919B000B22750 /* XCTest.framework */; };
 		D1C9BD8C191919B000B22750 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C9BD71191919B000B22750 /* Foundation.framework */; };
 		D1C9BD8D191919B000B22750 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C9BD75191919B000B22750 /* UIKit.framework */; };
@@ -40,13 +36,6 @@
 		D1C9BD71191919B000B22750 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D1C9BD73191919B000B22750 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D1C9BD75191919B000B22750 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		D1C9BD79191919B000B22750 /* MAOFlipViewController-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MAOFlipViewController-Info.plist"; sourceTree = "<group>"; };
-		D1C9BD7B191919B000B22750 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D1C9BD7D191919B000B22750 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D1C9BD7F191919B000B22750 /* MAOFlipViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MAOFlipViewController-Prefix.pch"; sourceTree = "<group>"; };
-		D1C9BD80191919B000B22750 /* MAOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAOAppDelegate.h; sourceTree = "<group>"; };
-		D1C9BD81191919B000B22750 /* MAOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAOAppDelegate.m; sourceTree = "<group>"; };
-		D1C9BD83191919B000B22750 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D1C9BD89191919B000B22750 /* MAOFlipViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MAOFlipViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C9BD8A191919B000B22750 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D1C9BD92191919B000B22750 /* MAOFlipViewControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MAOFlipViewControllerTests-Info.plist"; sourceTree = "<group>"; };
@@ -120,9 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				D1C9BDA219191A3D00B22750 /* viewcontroller */,
-				D1C9BD80191919B000B22750 /* MAOAppDelegate.h */,
-				D1C9BD81191919B000B22750 /* MAOAppDelegate.m */,
-				D1C9BD83191919B000B22750 /* Images.xcassets */,
 				D1C9BD78191919B000B22750 /* Supporting Files */,
 			);
 			path = MAOFlipViewController;
@@ -131,10 +117,6 @@
 		D1C9BD78191919B000B22750 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D1C9BD79191919B000B22750 /* MAOFlipViewController-Info.plist */,
-				D1C9BD7A191919B000B22750 /* InfoPlist.strings */,
-				D1C9BD7D191919B000B22750 /* main.m */,
-				D1C9BD7F191919B000B22750 /* MAOFlipViewController-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -272,8 +254,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1C9BD7C191919B000B22750 /* InfoPlist.strings in Resources */,
-				D1C9BD84191919B000B22750 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,8 +273,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1C9BDA619191A6400B22750 /* MAOPanGestureRecognizer.m in Sources */,
-				D1C9BD82191919B000B22750 /* MAOAppDelegate.m in Sources */,
-				D1C9BD7E191919B000B22750 /* main.m in Sources */,
 				D1C9BDAF19191BEB00B22750 /* MAOFlipViewController.m in Sources */,
 				D1C9BDAC19191B9300B22750 /* MAOFlipTransition.m in Sources */,
 				D1C9BDA919191AE600B22750 /* MAOFlipInteraction.m in Sources */,
@@ -320,14 +298,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D1C9BD7A191919B000B22750 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D1C9BD7B191919B000B22750 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		D1C9BD93191919B000B22750 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -494,6 +464,7 @@
 				D1C9BD9C191919B100B22750 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D1C9BD9D191919B100B22750 /* Build configuration list for PBXNativeTarget "MAOFlipViewControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +473,7 @@
 				D1C9BD9F191919B100B22750 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
