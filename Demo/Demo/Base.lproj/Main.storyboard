@@ -24,7 +24,7 @@
         <!--Detail View Controller-->
         <scene sceneID="b2z-PN-2Hs">
             <objects>
-                <viewController id="GAW-fE-TTz" customClass="DetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="GAW-fE-TTz" customClass="DetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oSG-bR-L80"/>
                         <viewControllerLayoutGuide type="bottom" id="Gft-N6-haf"/>

@@ -7,9 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "DetailViewController.h"
+#import "MAOFlipViewController.h"
 
-@interface ViewController ()
-
+@interface ViewController ()<MAOFlipViewControllerDelegate>
+@property (nonatomic) MAOFlipViewController *flipViewController;
 @end
 
 @implementation ViewController
@@ -18,12 +20,29 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.flipViewController = [[MAOFlipViewController alloc]init];
+    self.flipViewController.delegate = self;
+    [self addChildViewController:self.flipViewController];
+    self.flipViewController.view.frame = self.view.frame;
+    [self.view addSubview:self.flipViewController.view];
+    [self.flipViewController didMoveToParentViewController:self];
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - MAOFlipViewControllerDelegate
+
+- (UIViewController*)flipViewController:(MAOFlipViewController *)flipViewController contentIndex:(NSUInteger)contentIndex
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    //新規作成
+    DetailViewController *c = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+    c.requestNumberText = [NSString stringWithFormat:@"%d", contentIndex];
+    return c;
 }
+
+- (NSUInteger)numberOfFlipViewControllerContents
+{
+    return 5;
+}
+
+
 
 @end
