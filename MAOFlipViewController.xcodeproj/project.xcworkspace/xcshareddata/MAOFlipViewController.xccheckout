@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5AA1F6AD-E5BB-4D39-BA6F-C8C953B88E15</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MAOFlipViewController</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>76D577E7-6DBF-44F2-B8BD-BD8983F63610</key>
+		<string>https://github.com/nishimao/maoko.git</string>
+		<key>AC5817DB-AA22-498E-8DF2-FDFF663264AC</key>
+		<string>https://github.com/nishimao/MAOFlipViewController.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iphone/MAOFlipViewController/MAOFlipViewController.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>76D577E7-6DBF-44F2-B8BD-BD8983F63610</key>
+		<string>../../../..</string>
+		<key>AC5817DB-AA22-498E-8DF2-FDFF663264AC</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/nishimao/MAOFlipViewController.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>76D577E7-6DBF-44F2-B8BD-BD8983F63610</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AC5817DB-AA22-498E-8DF2-FDFF663264AC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MAOFlipViewController</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>76D577E7-6DBF-44F2-B8BD-BD8983F63610</string>
+			<key>IDESourceControlWCCName</key>
+			<string>maoko</string>
+		</dict>
+	</array>
+</dict>
+</plist>
