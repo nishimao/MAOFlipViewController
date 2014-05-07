@@ -2,7 +2,9 @@ MAOFlipViewController
 =====================
 Usage
 This is the OSS that provide interacition transition like FlipBoard.
+![](introduction.gif)
 
+Usage
 Podfile is below.
 ```
 platform :ios, '7.0'
