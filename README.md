@@ -2,7 +2,9 @@ MAOFlipViewController
 =====================
 
 This is the OSS that provide interacition transition like FlipBoard.
+![](introduction.gif)
 
+Usage
 Podfile is below.
 ```
 platform :ios, '7.0'
@@ -37,7 +39,6 @@ Example below.
 
 - (UIViewController*)flipViewController:(MAOFlipViewController *)flipViewController contentIndex:(NSUInteger)contentIndex
 {
-    //êVãKçÏê¨
     DetailViewController *c = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
     c.requestNumberText = [NSString stringWithFormat:@"%d", contentIndex];
     return c;
