@@ -4,12 +4,14 @@ Usage
 This is the OSS that provide interacition transition like FlipBoard.
 ![](introduction.gif)
 
+=====================
 Demo Project
 Please open the file below to run the demo project.
 ```
 MAOFlipViewController/Demo/Demo.xcodeproj
 ```
 
+=====================
 Usage
 Podfile is below.
 ```
