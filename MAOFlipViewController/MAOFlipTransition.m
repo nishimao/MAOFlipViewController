@@ -12,42 +12,25 @@
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    return 1.0;
+    return 0.35f;
 }
 
-- (UIImageView*)createImageView:(UIView*)view
+- (UIView *)createUpperHalf:(UIView *)view
 {
-    UIGraphicsBeginImageContext(view.frame.size);
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *viewSnapShot = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return [[UIImageView alloc]initWithImage:viewSnapShot];
+    CGRect snapRect = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height / 2);
+    UIView *topHalf = [view resizableSnapshotViewFromRect:snapRect afterScreenUpdates:NO withCapInsets:UIEdgeInsetsZero];
+    topHalf.userInteractionEnabled = NO;
+    return topHalf;
 }
 
-- (UIImageView*)createImageViewUpper:(UIImageView*)view
+- (UIView *)createBottomHalf:(UIView *)view
 {
-    CGSize snapSize = CGSizeMake(view.frame.size.width, view.frame.size.height / 2);
-    UIGraphicsBeginImageContext(snapSize);
-    [view.image drawAtPoint:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height / 2).origin];
-    UIImage *aboveViewSnapShot = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    UIImageView *aboveSnapView = [[UIImageView alloc]initWithImage:aboveViewSnapShot];
-    aboveSnapView.contentMode = UIViewContentModeScaleToFill;
-    [aboveSnapView setFrame:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height / 2)];
-    return aboveSnapView;
-}
-
-- (UIImageView*)createImageViewBottom:(UIImageView*)view
-{
-    CGSize snapSize = CGSizeMake(view.frame.size.width, view.frame.size.height / 2);
-    UIGraphicsBeginImageContext(snapSize);
-    [view.image drawAtPoint:CGRectMake(0, - (view.frame.size.height / 2), view.frame.size.width, view.frame.size.height / 2).origin];
-    UIImage *bottomViewSnapShot = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    UIImageView *bottomSnapView = [[UIImageView alloc]initWithImage:bottomViewSnapShot];
-    bottomSnapView.contentMode = UIViewContentModeScaleToFill;
-    [bottomSnapView setFrame:CGRectMake(0, view.frame.size.height / 2, view.frame.size.width, view.frame.size.height / 2)];
-    return bottomSnapView;
+    CGRect snapRect = CGRectMake(0, CGRectGetMidY(view.frame), view.frame.size.width, view.frame.size.height / 2);
+    UIView *bottomHalf = [view resizableSnapshotViewFromRect:snapRect afterScreenUpdates:NO withCapInsets:UIEdgeInsetsZero];
+    CGRect newFrame = CGRectOffset(bottomHalf.frame, 0, bottomHalf.bounds.size.height);
+    bottomHalf.frame = newFrame;
+    bottomHalf.userInteractionEnabled = NO;
+    return bottomHalf;
 }
 
 // This method can only  be a nop if the transition is interactive and not a percentDriven interactive transition.
@@ -57,22 +40,25 @@
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
-    UIImageView *fromView = [self createImageView:fromVC.view];
+    UIView *fromView = fromVC.view;
+    UIView *toView = toVC.view;
+    
+    UIView *fromSnapshot = [fromView snapshotViewAfterScreenUpdates:NO];
     
     //アニメーションを実行するためのコンテナビューを取得
     UIView *containerView = [transitionContext containerView];
     
     //遷移先のスナップショットを取る
-    UIImageView *toSnapshot = [self createImageView:toVC.view];
+    UIView *toSnapshot = [toView snapshotViewAfterScreenUpdates:YES];
     
-    CGFloat w = CGRectGetWidth(fromView.frame);
-    CGFloat h = CGRectGetHeight(fromView.frame) / 2.0f;
+    CGFloat w = CGRectGetWidth(fromSnapshot.frame);
+    CGFloat h = CGRectGetHeight(fromSnapshot.frame) / 2.0f;
     
-    UIImageView *fromUpperView = [self createImageViewUpper:fromView];
-    UIImageView *fromBottomView = [self createImageViewBottom:fromView];
+    UIView *fromUpperView = [self createUpperHalf:fromSnapshot];
+    UIView *fromBottomView = [self createBottomHalf:fromSnapshot];
     
-    UIImageView *toUpperView = [self createImageViewUpper:toSnapshot];
-    UIImageView *toBottomView = [self createImageViewBottom:toSnapshot];
+    UIView *toUpperView = [self createUpperHalf:toSnapshot];
+    UIView *toBottomView = [self createBottomHalf:toSnapshot];
     
     //上下のスナップショットをコンテナに配置
     [containerView addSubview:fromUpperView];
