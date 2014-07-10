@@ -37,44 +37,77 @@
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
 {
     //遷移元のビューコントローラーとビューを取得
-    UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIViewController *sourceVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *destinationVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
-    UIView *fromView = fromVC.view;
-    UIView *toView = toVC.view;
     
-    UIView *fromSnapshot = [fromView snapshotViewAfterScreenUpdates:NO];
+    UIView *sourceView = sourceVC.view;
+    UIView *destinationView = destinationVC.view;
+    
+    UIView *sourceSnapshot = [sourceView snapshotViewAfterScreenUpdates:NO];
     
     //アニメーションを実行するためのコンテナビューを取得
     UIView *containerView = [transitionContext containerView];
     
     //遷移先のスナップショットを取る
-    UIView *toSnapshot = [toView snapshotViewAfterScreenUpdates:YES];
+    UIView *destinationSnapshot = [destinationView snapshotViewAfterScreenUpdates:YES];
     
-    CGFloat w = CGRectGetWidth(fromSnapshot.frame);
-    CGFloat h = CGRectGetHeight(fromSnapshot.frame) / 2.0f;
+    CGFloat w = CGRectGetWidth(sourceSnapshot.frame);
+    CGFloat h = CGRectGetHeight(sourceSnapshot.frame) / 2.0f;
     
-    UIView *fromUpperView = [self createUpperHalf:fromSnapshot];
-    UIView *fromBottomView = [self createBottomHalf:fromSnapshot];
+    UIView *sourceUpperView = [self createUpperHalf:sourceSnapshot];
+    UIView *sourceBottomView = [self createBottomHalf:sourceSnapshot];
     
-    UIView *toUpperView = [self createUpperHalf:toSnapshot];
-    UIView *toBottomView = [self createBottomHalf:toSnapshot];
+    UIView *destinationUpperView = [self createUpperHalf:destinationSnapshot];
+    UIView *destinationBottomView = [self createBottomHalf:destinationSnapshot];
+    
+    CGFloat minShadow = 0.0f;
+    CGFloat maxShadow = 0.7f;
+    
+    UIView *sourceUpperShadow = [[UIView alloc] initWithFrame:sourceUpperView.frame];
+    sourceUpperShadow.backgroundColor = [UIColor blackColor];
+    
+    UIView *sourceBottomShadow = [[UIView alloc] initWithFrame:sourceBottomView.frame];
+    sourceBottomShadow.backgroundColor = [UIColor blackColor];
+    
+    UIView *destinationUpperShadow = [[UIView alloc] initWithFrame:destinationUpperView.frame];
+    destinationUpperShadow.backgroundColor = [UIColor blackColor];
+    
+    UIView *destinationBottomShadow = [[UIView alloc] initWithFrame:destinationBottomView.frame];
+    destinationBottomShadow.backgroundColor = [UIColor blackColor];
+    
+
     
     //上下のスナップショットをコンテナに配置
-    [containerView addSubview:fromUpperView];
-    [containerView addSubview:fromBottomView];
+    [containerView addSubview:sourceUpperView];
+    [containerView addSubview:sourceBottomView];
+    
+
     
     if (self.presenting) {
         //Pushの動作。上にめくる
         
         //高さ0にしておく
-        [toUpperView setFrame:CGRectMake(0, toUpperView.frame.size.height, toUpperView.frame.size.width, 0)];
+        [destinationUpperView setFrame:CGRectMake(0, destinationUpperView.frame.size.height,
+                                                  destinationUpperView.frame.size.width, 0)];
         
         //遷移先のビューをスナップショットの下に挿入
-        [containerView insertSubview:toVC.view belowSubview:fromUpperView];
+        [containerView insertSubview:destinationVC.view belowSubview:sourceUpperView];
         
         //めくり先の上のビュー
-        [containerView addSubview:toUpperView];
+        [containerView addSubview:destinationUpperView];
+        
+        
+        // Add shadows
+        sourceUpperShadow.alpha = minShadow;
+        sourceBottomShadow.alpha = minShadow;
+        destinationUpperShadow.alpha = minShadow;
+        destinationBottomShadow.alpha = maxShadow;
+
+        [containerView insertSubview:sourceUpperShadow aboveSubview:sourceUpperView];
+        [containerView insertSubview:sourceBottomShadow aboveSubview:sourceBottomView];
+        [containerView insertSubview:destinationUpperShadow aboveSubview:destinationUpperView];
+        [containerView insertSubview:destinationBottomShadow belowSubview:sourceBottomView];
         
         //切れ目がないアニメーション
         [UIView animateKeyframesWithDuration:[self transitionDuration:transitionContext]
@@ -87,7 +120,11 @@
                                                               relativeDuration:0.5
                                                                     animations:
                                        ^{
-                                           fromBottomView.frame = CGRectMake(0, fromBottomView.frame.origin.y, w, 0);
+                                           sourceBottomView.frame = CGRectMake(0, sourceBottomView.frame.origin.y, w, 0);
+                                           sourceBottomShadow.frame = sourceBottomView.frame;
+                                           sourceBottomShadow.alpha = maxShadow * 0.5;
+                                           destinationUpperShadow.alpha = maxShadow * 0.5;
+                                           destinationBottomShadow.alpha = minShadow;
                                        }];
                                       
                                       // 2つ目のKey-frame: 回転アニメーション
@@ -95,12 +132,21 @@
                                                               relativeDuration:0.5
                                                                     animations:
                                        ^{
-                                           toUpperView.frame = CGRectMake(0, 0, w, h);
+                                           destinationUpperView.frame = CGRectMake(0, 0, w, h);
+                                           destinationUpperShadow.frame = destinationUpperView.frame;
+                                           destinationUpperShadow.alpha = minShadow;
+                                           sourceUpperShadow.alpha = maxShadow;
                                        }];
                                   }
                                   completion:^(BOOL finished){
-                                      [fromBottomView removeFromSuperview];//不要になるため削除する
-                                      [fromUpperView removeFromSuperview];//遷移元の上半分は不要になるため削除する
+                                      [sourceBottomView removeFromSuperview];//不要になるため削除する
+                                      [sourceUpperView removeFromSuperview];//遷移元の上半分は不要になるため削除する
+                                      
+                                      // Remove shadows
+                                      [sourceUpperShadow removeFromSuperview];
+                                      [sourceBottomShadow removeFromSuperview];
+                                      [destinationUpperShadow removeFromSuperview];
+                                      [destinationBottomShadow removeFromSuperview];
                                       
                                       // 画面遷移終了を通知
                                       BOOL completed = ![transitionContext transitionWasCancelled];
@@ -113,12 +159,12 @@
         
         //高さ設定しておく
         //高さ0にしておく
-        [containerView addSubview:toBottomView];
+        [containerView addSubview:destinationBottomView];
         
-        [toBottomView setFrame:CGRectMake(0, h, w, 0)];
+        [destinationBottomView setFrame:CGRectMake(0, h, w, 0)];
         
         //遷移先のビューをスナップショットの下に挿入
-        [containerView insertSubview:toVC.view belowSubview:fromUpperView];
+        [containerView insertSubview:destinationVC.view belowSubview:sourceUpperView];
         
         //切れ目がないアニメーション
         [UIView animateKeyframesWithDuration:[self transitionDuration:transitionContext]
@@ -130,7 +176,7 @@
                                                               relativeDuration:0.5
                                                                     animations:
                                        ^{
-                                           fromUpperView.frame = CGRectMake(0, h, w, 0);
+                                           sourceUpperView.frame = CGRectMake(0, h, w, 0);
                                        }];
                                       
                                       // 2つ目のKey-frame: 回転アニメーション
@@ -138,13 +184,13 @@
                                                               relativeDuration:0.5
                                                                     animations:
                                        ^{
-                                           toBottomView.frame = CGRectMake(0, h, w, h);
+                                           destinationBottomView.frame = CGRectMake(0, h, w, h);
                                        }];
                                   }
                                   completion:^(BOOL finished){
-                                      [fromBottomView removeFromSuperview];//遷移元の上半分は不要になるため削除する
-                                      [fromUpperView removeFromSuperview];//不要になるため削除する
-                                      [toBottomView removeFromSuperview];
+                                      [sourceBottomView removeFromSuperview];//遷移元の上半分は不要になるため削除する
+                                      [sourceUpperView removeFromSuperview];//不要になるため削除する
+                                      [destinationBottomView removeFromSuperview];
                                       
                                       // 画面遷移終了を通知
                                       BOOL completed = ![transitionContext transitionWasCancelled];
