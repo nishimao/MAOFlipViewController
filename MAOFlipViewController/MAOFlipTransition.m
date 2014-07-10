@@ -76,13 +76,13 @@
     UIView *destinationBottomShadow = [[UIView alloc] initWithFrame:destinationBottomView.frame];
     destinationBottomShadow.backgroundColor = [UIColor blackColor];
     
-
+    
     
     //上下のスナップショットをコンテナに配置
     [containerView addSubview:sourceUpperView];
     [containerView addSubview:sourceBottomView];
     
-
+    
     
     if (self.presenting) {
         //Pushの動作。上にめくる
@@ -105,7 +105,7 @@
         sourceBottomShadow.alpha = minShadow;
         destinationUpperShadow.alpha = minShadow;
         destinationBottomShadow.alpha = maxShadow;
-
+        
         [containerView insertSubview:sourceUpperShadow aboveSubview:sourceUpperView];
         [containerView insertSubview:sourceBottomShadow aboveSubview:sourceBottomView];
         [containerView insertSubview:destinationUpperShadow aboveSubview:destinationUpperView];
@@ -143,6 +143,8 @@
                                   completion:^(BOOL finished){
                                       [sourceBottomView removeFromSuperview];//不要になるため削除する
                                       [sourceUpperView removeFromSuperview];//遷移元の上半分は不要になるため削除する
+                                      [destinationUpperView removeFromSuperview];
+                                      [destinationBottomView removeFromSuperview];
                                       
                                       // Remove shadows
                                       [sourceUpperShadow removeFromSuperview];
@@ -213,7 +215,9 @@
                                   completion:^(BOOL finished){
                                       [sourceBottomView removeFromSuperview];//遷移元の上半分は不要になるため削除する
                                       [sourceUpperView removeFromSuperview];//不要になるため削除する
+                                      [destinationUpperView removeFromSuperview];
                                       [destinationBottomView removeFromSuperview];
+                                      
                                       
                                       // Remove shadows
                                       [sourceUpperShadow removeFromSuperview];
