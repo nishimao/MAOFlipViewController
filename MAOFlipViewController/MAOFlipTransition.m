@@ -99,6 +99,8 @@
         
         
         // Add shadows
+        destinationUpperShadow.frame = destinationUpperView.frame;
+        
         sourceUpperShadow.alpha = minShadow;
         sourceBottomShadow.alpha = minShadow;
         destinationUpperShadow.alpha = minShadow;
@@ -166,6 +168,19 @@
         //遷移先のビューをスナップショットの下に挿入
         [containerView insertSubview:destinationVC.view belowSubview:sourceUpperView];
         
+        // Add shadows
+        destinationBottomShadow.frame = destinationBottomView.frame;
+        
+        sourceUpperShadow.alpha = minShadow;
+        sourceBottomShadow.alpha = minShadow;
+        destinationUpperShadow.alpha = maxShadow;
+        destinationBottomShadow.alpha = minShadow;
+        
+        [containerView insertSubview:sourceUpperShadow aboveSubview:sourceUpperView];
+        [containerView insertSubview:sourceBottomShadow aboveSubview:sourceBottomView];
+        [containerView insertSubview:destinationUpperShadow belowSubview:sourceUpperView];
+        [containerView insertSubview:destinationBottomShadow aboveSubview:destinationBottomView];
+        
         //切れ目がないアニメーション
         [UIView animateKeyframesWithDuration:[self transitionDuration:transitionContext]
                                        delay:0
@@ -177,6 +192,10 @@
                                                                     animations:
                                        ^{
                                            sourceUpperView.frame = CGRectMake(0, h, w, 0);
+                                           sourceUpperShadow.frame = sourceUpperView.frame;
+                                           sourceUpperShadow.alpha = maxShadow * 0.5f;
+                                           destinationBottomShadow.alpha = maxShadow * 0.5f;
+                                           destinationUpperShadow.alpha = minShadow;
                                        }];
                                       
                                       // 2つ目のKey-frame: 回転アニメーション
@@ -185,12 +204,22 @@
                                                                     animations:
                                        ^{
                                            destinationBottomView.frame = CGRectMake(0, h, w, h);
+                                           destinationBottomShadow.frame = destinationBottomView.frame;
+                                           destinationBottomShadow.alpha = minShadow;
+                                           sourceUpperShadow.alpha = maxShadow;
+                                           sourceBottomShadow.alpha = maxShadow;
                                        }];
                                   }
                                   completion:^(BOOL finished){
                                       [sourceBottomView removeFromSuperview];//遷移元の上半分は不要になるため削除する
                                       [sourceUpperView removeFromSuperview];//不要になるため削除する
                                       [destinationBottomView removeFromSuperview];
+                                      
+                                      // Remove shadows
+                                      [sourceUpperShadow removeFromSuperview];
+                                      [sourceBottomShadow removeFromSuperview];
+                                      [destinationUpperShadow removeFromSuperview];
+                                      [destinationBottomShadow removeFromSuperview];
                                       
                                       // 画面遷移終了を通知
                                       BOOL completed = ![transitionContext transitionWasCancelled];
