@@ -49,12 +49,10 @@
             
             //NSLog(@"Point: %@ | Boundary: %@", NSStringFromCGPoint(nowPoint), @(boundary));
             
-            if (boundary < nowPoint.y) {
-                if (isDownwards) break;
+            if (!isDownwards) {
                 self.isPushMode = YES;
                 [self.delegate interactionPushBeganAtPoint:nowPoint];
             } else {
-                if (!isDownwards) break;
                 self.isPushMode = NO;
                 [self.delegate interactionPopBeganAtPoint:nowPoint];
             }
