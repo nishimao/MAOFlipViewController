@@ -31,26 +31,49 @@
         case UIGestureRecognizerStateBegan:
         {
             // ジェスチャーを検出したらデリゲートを通じて画面遷移を開始する
+            
+            //NSLog(@"Gesture began...");
+            
             CGPoint nowPoint = [gesture locationInView:self.view];
-            CGFloat boundary = (self.view.frame.origin.y + (self.view.frame.size.height / 2));
-            if (boundary < nowPoint.y) {
+            CGFloat boundary = CGRectGetMidY(self.view.frame);
+            CGPoint velocity = [gesture velocityInView:self.view];
+            
+            BOOL isDownwards = (velocity.y > 0);
+            
+            if (isDownwards) {
+                //NSLog(@"Downwards...");
+            } else {
+                //NSLog(@"Upwards...");
+            }
+            
+            
+            //NSLog(@"Point: %@ | Boundary: %@", NSStringFromCGPoint(nowPoint), @(boundary));
+            
+            if (!isDownwards) {
                 self.isPushMode = YES;
                 [self.delegate interactionPushBeganAtPoint:nowPoint];
-            }else{
+            } else {
                 self.isPushMode = NO;
                 [self.delegate interactionPopBeganAtPoint:nowPoint];
             }
+            
+            //NSLog(@"MODE: %@", self.isPushMode ? @"PUSH" : @"POP");
             break;
         }
         case UIGestureRecognizerStateChanged:
         {
             // ジェスチャーの更新に合わせて画面遷移の進捗を更新する
+            
             CGRect viewRect = self.view.bounds;
             CGPoint translation = [gesture translationInView:self.view];
             CGFloat percent = translation.y / viewRect.size.height;
             percent = fabsf(percent);
             percent = MIN(1.0, MAX(0.0, percent));
             [self updateInteractiveTransition:percent];
+            
+            //NSLog(@"Gesture changed...");
+            //NSLog(@"Translation: %@ | Percent: %@", NSStringFromCGPoint(translation), @(percent));
+            
             break;
         }
         case UIGestureRecognizerStateCancelled:
@@ -64,11 +87,11 @@
             if (self.isPushMode){//下から上にスワイプして進むモード
                 if (boundary > nowPoint.y) {//現在の指の位置が上半分
                     [self finishInteractiveTransition];
-                }else{
+                } else {
                     // 下方向に動かしていたらキャンセルとみなす
                     [self cancelInteractiveTransition];
                 }
-            }else{//上から下にスワイプして戻るモード
+            } else {//上から下にスワイプして戻るモード
                 if (boundary < nowPoint.y) {//現在の指の位置が上半分
                     [self finishInteractiveTransition];
                     

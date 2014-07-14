@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>CA9E4A97-77E3-4333-92C7-A7866B4B5A38</string>
+	<string>98C09FBE-DB1C-431C-8232-D83E70B2AC17</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Demo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>AC5817DB-AA22-498E-8DF2-FDFF663264AC</key>
-		<string>https://github.com/nishimao/MAOFlipViewController.git</string>
+		<key>72CB9997-2937-4E3C-A96A-00B3D57A1615</key>
+		<string>https://github.com/alladinian/MAOFlipViewController.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Demo/Demo.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>AC5817DB-AA22-498E-8DF2-FDFF663264AC</key>
+		<key>72CB9997-2937-4E3C-A96A-00B3D57A1615</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/nishimao/MAOFlipViewController.git</string>
+	<string>https://github.com/alladinian/MAOFlipViewController.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>AC5817DB-AA22-498E-8DF2-FDFF663264AC</string>
+	<string>72CB9997-2937-4E3C-A96A-00B3D57A1615</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>AC5817DB-AA22-498E-8DF2-FDFF663264AC</string>
+			<string>72CB9997-2937-4E3C-A96A-00B3D57A1615</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MAOFlipViewController</string>
 		</dict>

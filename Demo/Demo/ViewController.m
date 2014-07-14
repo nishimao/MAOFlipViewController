@@ -34,7 +34,7 @@
 {
     //新規作成
     DetailViewController *c = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
-    c.requestNumberText = [NSString stringWithFormat:@"%d", contentIndex];
+    c.requestNumberText = [NSString stringWithFormat:@"%lu", (unsigned long)contentIndex];
     return c;
 }
 
