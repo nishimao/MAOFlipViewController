@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "MAOFlipViewController"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "This is the OSS that provide interacition transition like FlipBoard."
   s.description  = "This is very easy interaction trasitioion library. This is the OSS that provide interacition transition like FlipBoard."
   s.homepage     = "https://github.com/nishimao/MAOFlipViewController"
