@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.social_media_url   = "http://twitter.com/mao_nishi"
   s.platform     = :ios, "7.0"
   s.ios.deployment_target = "7.0"
-  s.source       = { :git => "https://github.com/nishimao/MAOFlipViewController.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/nishimao/MAOFlipViewController.git", :tag => "0.0.2" }
   s.source_files  = "MAOFlipViewController/**/*.{h,m}"
   s.exclude_files = "Classes/Exclude"
   s.requires_arc = true
